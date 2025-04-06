@@ -6,8 +6,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useUserContext, UserData } from "@/context/UserContext";
 import { Button } from "@/components/ui/button";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { 
   Select,
   SelectContent,
@@ -49,13 +49,7 @@ export default function Onboarding() {
   const [step, setStep] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    watch,
-    formState: { errors, isValid },
-  } = useForm<FormValues>({
+  const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     mode: "onChange",
     defaultValues: {
@@ -77,153 +71,186 @@ export default function Onboarding() {
     }, 1500);
   };
 
-  const handleIndustryChange = (value: string) => {
-    setValue("industry", value, { shouldValidate: true });
-  };
-
   return (
     <Layout requiresAuth={false}>
-      <div className="flex flex-col items-center justify-center min-h-screen p-4 md:p-8 animate-fade-in">
-        <div className="glass-card max-w-md w-full p-8 rounded-xl">
+      <div className="flex flex-col items-center justify-center min-h-screen p-4 md:p-8 animate-fade-in bg-background">
+        <div className="text-center mb-8">
+          <img 
+            src="/lovable-uploads/89406594-7b8d-48fa-aae3-1f25b3209b52.png" 
+            alt="InfoTech Brains Logo" 
+            className="h-12 mx-auto mb-6" 
+          />
+        </div>
+        
+        <div className="glass-card max-w-md w-full p-8 rounded-xl shadow-lg dark:shadow-indigo-500/10">
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold mb-2 text-gradient">Welcome to InfoTech Brains</h1>
             <p className="text-muted-foreground">Let's set up your account in a few steps</p>
           </div>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-            {step === 1 && (
-              <div className="space-y-4 animate-fade-in">
-                <div className="space-y-2">
-                  <Label htmlFor="name">Full Name</Label>
-                  <Input
-                    id="name"
-                    placeholder="John Doe"
-                    {...register("name")}
-                    className={errors.name ? "border-destructive" : ""}
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              {step === 1 && (
+                <div className="space-y-4 animate-fade-in">
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Full Name</FormLabel>
+                        <FormControl>
+                          <Input 
+                            placeholder="Anshumaan Saraf" 
+                            {...field} 
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
                   />
-                  {errors.name && (
-                    <p className="text-sm text-destructive">{errors.name.message}</p>
-                  )}
-                </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email Address</Label>
-                  <Input
-                    id="email"
-                    placeholder="john.doe@example.com"
-                    {...register("email")}
-                    className={errors.email ? "border-destructive" : ""}
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Email Address</FormLabel>
+                        <FormControl>
+                          <Input 
+                            placeholder="anshumaansaraf24@gmail.com" 
+                            type="email" 
+                            {...field} 
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
                   />
-                  {errors.email && (
-                    <p className="text-sm text-destructive">{errors.email.message}</p>
-                  )}
-                </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="company">Company Name</Label>
-                  <Input
-                    id="company"
-                    placeholder="Acme Inc."
-                    {...register("company")}
-                    className={errors.company ? "border-destructive" : ""}
+                  <FormField
+                    control={form.control}
+                    name="company"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Company Name</FormLabel>
+                        <FormControl>
+                          <Input 
+                            placeholder="Your Company" 
+                            {...field} 
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
                   />
-                  {errors.company && (
-                    <p className="text-sm text-destructive">{errors.company.message}</p>
-                  )}
-                </div>
 
-                <Button 
-                  type="button" 
-                  className="w-full"
-                  onClick={() => setStep(2)}
-                  disabled={
-                    !watch("name") || 
-                    !watch("email") || 
-                    !watch("company") ||
-                    !!errors.name ||
-                    !!errors.email ||
-                    !!errors.company
-                  }
-                >
-                  Next <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </div>
-            )}
-
-            {step === 2 && (
-              <div className="space-y-4 animate-fade-in">
-                <div className="space-y-2">
-                  <Label htmlFor="phone">Phone Number</Label>
-                  <Input
-                    id="phone"
-                    placeholder="+1 (555) 123-4567"
-                    {...register("phone")}
-                    className={errors.phone ? "border-destructive" : ""}
-                  />
-                  {errors.phone && (
-                    <p className="text-sm text-destructive">{errors.phone.message}</p>
-                  )}
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="website">Website (Optional)</Label>
-                  <Input
-                    id="website"
-                    placeholder="https://example.com"
-                    {...register("website")}
-                    className={errors.website ? "border-destructive" : ""}
-                  />
-                  {errors.website && (
-                    <p className="text-sm text-destructive">{errors.website.message}</p>
-                  )}
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="industry">Industry</Label>
-                  <Select onValueChange={handleIndustryChange}>
-                    <SelectTrigger
-                      id="industry"
-                      className={errors.industry ? "border-destructive" : ""}
-                    >
-                      <SelectValue placeholder="Select your industry" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {industries.map((industry) => (
-                        <SelectItem key={industry} value={industry}>
-                          {industry}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  {errors.industry && (
-                    <p className="text-sm text-destructive">{errors.industry.message}</p>
-                  )}
-                </div>
-
-                <div className="flex gap-3">
                   <Button 
                     type="button" 
-                    variant="outline" 
-                    className="flex-1"
-                    onClick={() => setStep(1)}
+                    className="w-full mt-6 transition-all duration-300 hover:shadow-md"
+                    onClick={() => setStep(2)}
+                    disabled={
+                      !form.getValues("name") || 
+                      !form.getValues("email") || 
+                      !form.getValues("company") ||
+                      !!form.formState.errors.name ||
+                      !!form.formState.errors.email ||
+                      !!form.formState.errors.company
+                    }
                   >
-                    Back
-                  </Button>
-                  <Button 
-                    type="submit" 
-                    className="flex-1"
-                    disabled={!isValid || isLoading}
-                  >
-                    {isLoading ? "Processing..." : "Complete Setup"}
+                    Next <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </div>
-              </div>
-            )}
-          </form>
+              )}
+
+              {step === 2 && (
+                <div className="space-y-4 animate-fade-in">
+                  <FormField
+                    control={form.control}
+                    name="phone"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Phone Number</FormLabel>
+                        <FormControl>
+                          <Input 
+                            placeholder="+1 (555) 123-4567" 
+                            {...field} 
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="website"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Website (Optional)</FormLabel>
+                        <FormControl>
+                          <Input 
+                            placeholder="https://example.com" 
+                            {...field} 
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="industry"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Industry</FormLabel>
+                        <Select 
+                          onValueChange={field.onChange} 
+                          defaultValue={field.value}
+                        >
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select your industry" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            {industries.map((industry) => (
+                              <SelectItem key={industry} value={industry}>
+                                {industry}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <div className="flex gap-3 mt-6">
+                    <Button 
+                      type="button" 
+                      variant="outline" 
+                      className="flex-1 transition-all duration-300"
+                      onClick={() => setStep(1)}
+                    >
+                      Back
+                    </Button>
+                    <Button 
+                      type="submit" 
+                      className="flex-1 transition-all duration-300 hover:shadow-md"
+                      disabled={!form.formState.isValid || isLoading}
+                    >
+                      {isLoading ? "Processing..." : "Complete Setup"}
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </form>
+          </Form>
         </div>
 
         <p className="mt-4 text-muted-foreground text-sm">
-          &copy; 2025 InfoTech Brains. All rights reserved.
+          &copy; {new Date().getFullYear()} InfoTech Brains. All rights reserved.
         </p>
       </div>
     </Layout>

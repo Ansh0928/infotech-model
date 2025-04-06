@@ -128,6 +128,10 @@ export default {
 						transform: 'scale(1)',
 						opacity: '1'
 					}
+				},
+				'theme-transition': {
+					'0%': { opacity: '0.8' },
+					'100%': { opacity: '1' }
 				}
 			},
 			animation: {
@@ -136,6 +140,7 @@ export default {
 				'fade-in': 'fade-in 0.3s ease-out',
 				'fade-out': 'fade-out 0.3s ease-out',
 				'scale-in': 'scale-in 0.3s ease-out',
+				'theme-transition': 'theme-transition 0.5s ease-out'
 			}
 		}
 	},

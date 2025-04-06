@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useUserContext } from "@/context/UserContext";
 import { Button } from "@/components/ui/button";
@@ -10,8 +10,11 @@ import {
   User, 
   Menu, 
   X, 
-  ChevronRight 
+  ChevronRight,
+  Sun,
+  Moon
 } from "lucide-react";
+import { Toggle } from "@/components/ui/toggle";
 
 interface NavItemProps {
   icon: React.ElementType;
@@ -45,9 +48,24 @@ const NavItem = ({ icon: Icon, label, path, isCollapsed, isActive, onClick }: Na
 
 export default function Sidebar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
   const navigate = useNavigate();
   const location = useLocation();
   const { userData } = useUserContext();
+
+  // Initialize theme from localStorage on component mount
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' || 'dark';
+    setTheme(savedTheme);
+    document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+    document.documentElement.classList.toggle('dark', newTheme === 'dark');
+  };
 
   const navItems = [
     { label: "Home", icon: Home, path: "/dashboard" },
@@ -69,11 +87,26 @@ export default function Sidebar() {
     >
       <div className="p-4 flex items-center justify-between border-b border-border">
         {!isCollapsed && (
-          <h2 className="text-xl font-bold text-gradient">InfoTech Brains</h2>
+          <div className="flex items-center">
+            <img 
+              src="/lovable-uploads/89406594-7b8d-48fa-aae3-1f25b3209b52.png" 
+              alt="InfoTech Brains Logo" 
+              className="h-8 mr-2" 
+            />
+          </div>
         )}
-        <Button variant="ghost" size="icon" onClick={toggleSidebar}>
-          {isCollapsed ? <ChevronRight className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </Button>
+        <div className="flex items-center">
+          <Toggle 
+            pressed={theme === 'dark'} 
+            onPressedChange={toggleTheme}
+            className="mr-2"
+          >
+            {theme === 'dark' ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+          </Toggle>
+          <Button variant="ghost" size="icon" onClick={toggleSidebar}>
+            {isCollapsed ? <ChevronRight className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </Button>
+        </div>
       </div>
 
       {userData && (

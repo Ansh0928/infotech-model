@@ -48,11 +48,11 @@ export default function Dashboard() {
             <h1 className="text-3xl font-bold">Welcome, {userData.name}!</h1>
             <p className="text-muted-foreground">Here's an overview of your account</p>
           </div>
-          <Button variant="outline">View Tutorials</Button>
+          <Button variant="outline" className="transition-all duration-300 hover:shadow-md">View Tutorials</Button>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <Card>
+          <Card className="border border-border/40 shadow-sm hover:shadow-md transition-all duration-300">
             <CardHeader className="pb-2">
               <CardTitle className="text-lg">Company</CardTitle>
             </CardHeader>
@@ -60,7 +60,7 @@ export default function Dashboard() {
               <p className="text-2xl font-semibold">{userData.company}</p>
             </CardContent>
           </Card>
-          <Card>
+          <Card className="border border-border/40 shadow-sm hover:shadow-md transition-all duration-300">
             <CardHeader className="pb-2">
               <CardTitle className="text-lg">Industry</CardTitle>
             </CardHeader>
@@ -68,7 +68,7 @@ export default function Dashboard() {
               <p className="text-2xl font-semibold">{userData.industry}</p>
             </CardContent>
           </Card>
-          <Card>
+          <Card className="border border-border/40 shadow-sm hover:shadow-md transition-all duration-300">
             <CardHeader className="pb-2">
               <CardTitle className="text-lg">Contact</CardTitle>
             </CardHeader>
@@ -77,7 +77,7 @@ export default function Dashboard() {
               <p className="text-sm truncate">{userData.phone}</p>
             </CardContent>
           </Card>
-          <Card>
+          <Card className="border border-border/40 shadow-sm hover:shadow-md transition-all duration-300">
             <CardHeader className="pb-2">
               <CardTitle className="text-lg">Website</CardTitle>
             </CardHeader>
@@ -92,7 +92,7 @@ export default function Dashboard() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
           {/* WhatsApp Integration Card */}
-          <Card className={`hover-scale card-shine ${integrations.whatsapp ? 'border-green-500' : ''}`}>
+          <Card className={`hover-scale card-shine border ${integrations.whatsapp ? 'border-green-500' : 'border-border/40'} shadow-sm hover:shadow-md transition-all duration-300`}>
             <CardHeader>
               <div className="flex justify-between items-start">
                 <div className="rounded-full bg-green-500/20 p-3">
@@ -112,11 +112,11 @@ export default function Dashboard() {
             <CardFooter>
               <Dialog open={openDialog === 'whatsapp'} onOpenChange={() => setOpenDialog(openDialog === 'whatsapp' ? null : 'whatsapp')}>
                 <DialogTrigger asChild>
-                  <Button variant={integrations.whatsapp ? "outline" : "default"} className="w-full">
+                  <Button variant={integrations.whatsapp ? "outline" : "default"} className="w-full transition-all duration-300">
                     {integrations.whatsapp ? "Manage Connection" : "Connect"}
                   </Button>
                 </DialogTrigger>
-                <DialogContent>
+                <DialogContent className="sm:max-w-md">
                   <DialogHeader>
                     <DialogTitle>Connect WhatsApp Business API</DialogTitle>
                     <DialogDescription>
@@ -141,6 +141,7 @@ export default function Dashboard() {
                       type="button" 
                       onClick={() => handleIntegration('whatsapp')}
                       disabled={isLoading}
+                      className="transition-all duration-300"
                     >
                       {isLoading ? "Connecting..." : "Connect Account"}
                     </Button>
@@ -151,7 +152,7 @@ export default function Dashboard() {
           </Card>
 
           {/* Instagram Integration Card */}
-          <Card className={`hover-scale card-shine ${integrations.instagram ? 'border-purple-500' : ''}`}>
+          <Card className={`hover-scale card-shine border ${integrations.instagram ? 'border-purple-500' : 'border-border/40'} shadow-sm hover:shadow-md transition-all duration-300`}>
             <CardHeader>
               <div className="flex justify-between items-start">
                 <div className="rounded-full bg-purple-500/20 p-3">
@@ -171,11 +172,11 @@ export default function Dashboard() {
             <CardFooter>
               <Dialog open={openDialog === 'instagram'} onOpenChange={() => setOpenDialog(openDialog === 'instagram' ? null : 'instagram')}>
                 <DialogTrigger asChild>
-                  <Button variant={integrations.instagram ? "outline" : "default"} className="w-full">
+                  <Button variant={integrations.instagram ? "outline" : "default"} className="w-full transition-all duration-300">
                     {integrations.instagram ? "Manage Connection" : "Connect"}
                   </Button>
                 </DialogTrigger>
-                <DialogContent>
+                <DialogContent className="sm:max-w-md">
                   <DialogHeader>
                     <DialogTitle>Connect Instagram Messenger</DialogTitle>
                     <DialogDescription>
@@ -200,6 +201,7 @@ export default function Dashboard() {
                       type="button" 
                       onClick={() => handleIntegration('instagram')}
                       disabled={isLoading}
+                      className="transition-all duration-300"
                     >
                       {isLoading ? "Connecting..." : "Connect Account"}
                     </Button>
@@ -210,7 +212,7 @@ export default function Dashboard() {
           </Card>
 
           {/* Facebook Integration Card */}
-          <Card className={`hover-scale card-shine ${integrations.facebook ? 'border-blue-500' : ''}`}>
+          <Card className={`hover-scale card-shine border ${integrations.facebook ? 'border-blue-500' : 'border-border/40'} shadow-sm hover:shadow-md transition-all duration-300`}>
             <CardHeader>
               <div className="flex justify-between items-start">
                 <div className="rounded-full bg-blue-500/20 p-3">
@@ -230,11 +232,11 @@ export default function Dashboard() {
             <CardFooter>
               <Dialog open={openDialog === 'facebook'} onOpenChange={() => setOpenDialog(openDialog === 'facebook' ? null : 'facebook')}>
                 <DialogTrigger asChild>
-                  <Button variant={integrations.facebook ? "outline" : "default"} className="w-full">
+                  <Button variant={integrations.facebook ? "outline" : "default"} className="w-full transition-all duration-300">
                     {integrations.facebook ? "Manage Connection" : "Connect"}
                   </Button>
                 </DialogTrigger>
-                <DialogContent>
+                <DialogContent className="sm:max-w-md">
                   <DialogHeader>
                     <DialogTitle>Connect Facebook Messenger</DialogTitle>
                     <DialogDescription>
@@ -263,6 +265,7 @@ export default function Dashboard() {
                       type="button" 
                       onClick={() => handleIntegration('facebook')}
                       disabled={isLoading}
+                      className="transition-all duration-300"
                     >
                       {isLoading ? "Connecting..." : "Connect Account"}
                     </Button>
