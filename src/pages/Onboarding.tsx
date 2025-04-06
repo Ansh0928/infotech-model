@@ -86,7 +86,7 @@ export default function Onboarding() {
       <div className="flex flex-col items-center justify-center min-h-screen p-4 md:p-8 animate-fade-in">
         <div className="glass-card max-w-md w-full p-8 rounded-xl">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold mb-2 text-gradient">Welcome to Flowly</h1>
+            <h1 className="text-3xl font-bold mb-2 text-gradient">Welcome to InfoTech Brains</h1>
             <p className="text-muted-foreground">Let's set up your account in a few steps</p>
           </div>
 
@@ -223,7 +223,7 @@ export default function Onboarding() {
         </div>
 
         <p className="mt-4 text-muted-foreground text-sm">
-          &copy; 2025 Flowly. All rights reserved.
+          &copy; 2025 InfoTech Brains. All rights reserved.
         </p>
       </div>
     </Layout>

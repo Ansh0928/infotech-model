@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import Layout from "@/components/Layout";
-import { useUserContext } from "@/context/UserContext";
+import { useUserContext, UserData } from "@/context/UserContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -12,7 +12,15 @@ import { toast } from "sonner";
 export default function Profile() {
   const { userData, saveUserData } = useUserContext();
   const [isEditing, setIsEditing] = useState(false);
-  const [formData, setFormData] = useState(userData || {});
+  
+  // Initialize with the userData or a default empty UserData object to satisfy TypeScript
+  const [formData, setFormData] = useState<UserData>(userData || {
+    name: "",
+    email: "",
+    company: "",
+    phone: "",
+    industry: "",
+  });
 
   if (!userData) {
     return (

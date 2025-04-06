@@ -69,7 +69,7 @@ export default function Sidebar() {
     >
       <div className="p-4 flex items-center justify-between border-b border-border">
         {!isCollapsed && (
-          <h2 className="text-xl font-bold text-gradient">Flowly</h2>
+          <h2 className="text-xl font-bold text-gradient">InfoTech Brains</h2>
         )}
         <Button variant="ghost" size="icon" onClick={toggleSidebar}>
           {isCollapsed ? <ChevronRight className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
