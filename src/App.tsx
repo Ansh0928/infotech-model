@@ -11,6 +11,7 @@ import Dashboard from "./pages/Dashboard";
 import Integrations from "./pages/Integrations";
 import Settings from "./pages/Settings";
 import Profile from "./pages/Profile";
+import Projects from "./pages/Projects";
 import NotFound from "./pages/NotFound";
 
 // Create a client
@@ -39,7 +40,7 @@ const App: React.FC = () => {
               <Route path="/flows" element={<NotFound title="Flows" message="Automation flows coming soon" />} />
               <Route path="/payments" element={<NotFound title="WA Pay" message="Payment functionality coming soon" />} />
               <Route path="/ecommerce" element={<NotFound title="EComm+" message="E-commerce features coming soon" />} />
-              <Route path="/projects" element={<NotFound title="My Projects" message="Project management coming soon" />} />
+              <Route path="/projects" element={<Projects />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

@@ -48,19 +48,6 @@ export default function Integrations() {
               </p>
             </CardContent>
           </Card>
-          
-          <Card className="hover-scale opacity-50">
-            <CardHeader>
-              <CardTitle>Telegram API (Coming Soon)</CardTitle>
-              <CardDescription>Expand your reach with Telegram messaging</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">
-                This integration is coming soon. You'll be able to connect your Telegram
-                bot to engage with customers on the Telegram platform.
-              </p>
-            </CardContent>
-          </Card>
         </div>
       </div>
     </Layout>
