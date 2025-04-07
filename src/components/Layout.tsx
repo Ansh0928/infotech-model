@@ -27,10 +27,12 @@ export default function Layout({ children, requiresAuth = true }: LayoutProps) {
   const showSidebar = location.pathname !== "/onboarding";
 
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex h-screen overflow-hidden bg-background">
       {showSidebar && <Sidebar />}
-      <main className="flex-1 overflow-y-auto">
-        {children}
+      <main className="flex-1 overflow-y-auto relative">
+        <div className="container mx-auto p-4 md:p-6 max-w-7xl">
+          {children}
+        </div>
       </main>
     </div>
   );

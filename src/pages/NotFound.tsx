@@ -1,22 +1,31 @@
 
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import Layout from "@/components/Layout";
 
-export default function NotFound() {
+interface NotFoundProps {
+  title?: string;
+  message?: string;
+}
+
+export default function NotFound({ title = "Page Not Found", message = "Sorry, the page you are looking for doesn't exist or has been moved." }: NotFoundProps) {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 animate-fade-in">
-      <div className="text-center max-w-md">
-        <div className="text-6xl font-bold text-brand-500 mb-4">404</div>
-        <h1 className="text-3xl font-bold mb-4">Page Not Found</h1>
-        <p className="text-muted-foreground mb-8">
-          The page you are looking for doesn't exist or has been moved.
-        </p>
-        <Button onClick={() => navigate("/dashboard")}>
-          Return to Dashboard
-        </Button>
+    <Layout>
+      <div className="flex flex-col items-center justify-center min-h-[80vh] text-center px-4">
+        <h1 className="text-4xl font-bold mb-4">{title}</h1>
+        <p className="text-muted-foreground mb-8 max-w-md">{message}</p>
+        <div className="space-x-4">
+          <Button onClick={() => navigate(-1)} variant="outline">
+            Go Back
+          </Button>
+          <Button onClick={() => navigate("/dashboard")}>
+            Go to Dashboard
+          </Button>
+        </div>
       </div>
-    </div>
+    </Layout>
   );
 }
