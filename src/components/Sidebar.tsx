@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useUserContext } from "@/context/UserContext";
@@ -9,7 +8,7 @@ import {
   Users, 
   Megaphone,
   PieChart, 
-  FlowChart, 
+  GitBranch, // Changed from FlowChart to GitBranch
   Wallet, 
   Settings, 
   Link, 
@@ -120,7 +119,7 @@ export default function Sidebar() {
     { label: "Contacts", icon: Users, path: "/contacts", section: "Main" },
     { label: "Campaigns", icon: Megaphone, path: "/campaigns", section: "Marketing" },
     { label: "Ads Manager", icon: PieChart, path: "/ads", section: "Marketing" },
-    { label: "Flows", icon: FlowChart, path: "/flows", section: "Automation" },
+    { label: "Flows", icon: GitBranch, path: "/flows", section: "Automation" }, // Changed icon here
     { label: "WA Pay", icon: Wallet, path: "/payments", section: "Automation" },
     { label: "Manage", icon: Settings, path: "/settings", section: "System" },
     { label: "Integrations", icon: Link, path: "/integrations", section: "System" },
@@ -215,7 +214,7 @@ export default function Sidebar() {
             >
               <div className={`flex ${isCollapsed ? 'flex-col items-center' : 'items-center gap-3'}`}>
                 <Avatar className={`size-8 ${isCollapsed ? 'mb-1' : ''}`}>
-                  <AvatarImage src={userData?.avatarUrl} />
+                  <AvatarImage src={userData?.name?.charAt(0) || 'U'} />
                   <AvatarFallback className="bg-primary/10 text-primary font-medium">
                     {userData?.name?.charAt(0) || 'U'}
                   </AvatarFallback>
