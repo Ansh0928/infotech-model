@@ -10,7 +10,6 @@ import {
   PieChart, 
   GitBranch,
   Wallet, 
-  Settings, 
   Link, 
   ShoppingCart, 
   FolderKanban,
@@ -19,15 +18,8 @@ import {
   Moon,
   PlusCircle,
   ChevronDown,
+  Settings, // For Manage section
   Zap, // For template message
-  CheckSquare, // For optin management
-  MessageSquare, // For live chat settings
-  UserCircle, // For agents
-  Tag, // For tags
-  BarChart, // For analytics
-  Key, // For API key
-  CreditCard, // For billing
-  Bell, // For notifications
 } from "lucide-react";
 import { Toggle } from "@/components/ui/toggle";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -130,15 +122,7 @@ export default function Sidebar() {
     { label: "Ads Manager", icon: PieChart, path: "/ads", section: "Marketing" },
     { label: "Flows", icon: GitBranch, path: "/flows", section: "Automation" },
     { label: "WA Pay", icon: Wallet, path: "/payments", section: "Automation" },
-    { label: "Template Message", icon: Zap, path: "/settings/templates", section: "Manage" },
-    { label: "Optin Management", icon: CheckSquare, path: "/settings/optin", section: "Manage" },
-    { label: "Live Chat Settings", icon: MessageSquare, path: "/settings/chat", section: "Manage" },
-    { label: "Agents", icon: UserCircle, path: "/settings/agents", section: "Manage" },
-    { label: "Tags", icon: Tag, path: "/settings/tags", section: "Manage" },
-    { label: "Analytics", icon: BarChart, path: "/settings/analytics", section: "Manage" },
-    { label: "API Key", icon: Key, path: "/settings/api", section: "Manage" },
-    { label: "Billing & Usage", icon: CreditCard, path: "/settings/billing", section: "Manage" },
-    { label: "Notification Prefs", icon: Bell, path: "/settings/notifications", section: "Manage" },
+    { label: "Manage", icon: Settings, path: "/manage", section: "System" },
     { label: "Integrations", icon: Link, path: "/integrations", section: "System" },
     { label: "EComm+", icon: ShoppingCart, path: "/ecommerce", section: "System" },
     { label: "My Projects", icon: FolderKanban, path: "/projects", section: "System" },
@@ -164,6 +148,7 @@ export default function Sidebar() {
   ];
 
   return (
+    
     <div 
       className={`
         flex flex-col bg-sidebar border-r border-sidebar-border h-screen transition-all duration-300 relative
@@ -212,7 +197,7 @@ export default function Sidebar() {
                 icon={item.icon}
                 label={item.label}
                 path={item.path}
-                isActive={location.pathname === item.path}
+                isActive={location.pathname === item.path || location.pathname.startsWith(item.path + '/')}
                 isCollapsed={isCollapsed}
                 onClick={() => navigate(item.path)}
                 badge={item.badge}
@@ -222,6 +207,7 @@ export default function Sidebar() {
         ))}
       </div>
 
+      
       <div className={`mt-auto p-3 border-t border-sidebar-border transition-all`}>
         <DropdownMenu open={showProjectSwitcher} onOpenChange={setShowProjectSwitcher}>
           <DropdownMenuTrigger asChild>
