@@ -8,7 +8,7 @@ import {
   Users, 
   Megaphone,
   PieChart, 
-  GitBranch, // Changed from FlowChart to GitBranch
+  GitBranch,
   Wallet, 
   Settings, 
   Link, 
@@ -18,7 +18,16 @@ import {
   Sun,
   Moon,
   PlusCircle,
-  ChevronDown
+  ChevronDown,
+  Zap, // For template message
+  CheckSquare, // For optin management
+  MessageSquare, // For live chat settings
+  UserCircle, // For agents
+  Tag, // For tags
+  BarChart, // For analytics
+  Key, // For API key
+  CreditCard, // For billing
+  Bell, // For notifications
 } from "lucide-react";
 import { Toggle } from "@/components/ui/toggle";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -119,9 +128,17 @@ export default function Sidebar() {
     { label: "Contacts", icon: Users, path: "/contacts", section: "Main" },
     { label: "Campaigns", icon: Megaphone, path: "/campaigns", section: "Marketing" },
     { label: "Ads Manager", icon: PieChart, path: "/ads", section: "Marketing" },
-    { label: "Flows", icon: GitBranch, path: "/flows", section: "Automation" }, // Changed icon here
+    { label: "Flows", icon: GitBranch, path: "/flows", section: "Automation" },
     { label: "WA Pay", icon: Wallet, path: "/payments", section: "Automation" },
-    { label: "Manage", icon: Settings, path: "/settings", section: "System" },
+    { label: "Template Message", icon: Zap, path: "/settings/templates", section: "Manage" },
+    { label: "Optin Management", icon: CheckSquare, path: "/settings/optin", section: "Manage" },
+    { label: "Live Chat Settings", icon: MessageSquare, path: "/settings/chat", section: "Manage" },
+    { label: "Agents", icon: UserCircle, path: "/settings/agents", section: "Manage" },
+    { label: "Tags", icon: Tag, path: "/settings/tags", section: "Manage" },
+    { label: "Analytics", icon: BarChart, path: "/settings/analytics", section: "Manage" },
+    { label: "API Key", icon: Key, path: "/settings/api", section: "Manage" },
+    { label: "Billing & Usage", icon: CreditCard, path: "/settings/billing", section: "Manage" },
+    { label: "Notification Prefs", icon: Bell, path: "/settings/notifications", section: "Manage" },
     { label: "Integrations", icon: Link, path: "/integrations", section: "System" },
     { label: "EComm+", icon: ShoppingCart, path: "/ecommerce", section: "System" },
     { label: "My Projects", icon: FolderKanban, path: "/projects", section: "System" },
