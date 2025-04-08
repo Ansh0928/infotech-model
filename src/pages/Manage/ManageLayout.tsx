@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { Outlet, NavLink, useLocation } from 'react-router-dom';
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Layout from '@/components/Layout';
 import { 
   Zap, 
@@ -19,53 +18,53 @@ const manageItems = [
   { 
     name: 'Template Message', 
     path: '/manage/templates', 
-    icon: <Zap className="h-4 w-4 mr-2" /> 
+    icon: <Zap className="h-4 w-4" /> 
   },
   { 
     name: 'Optin Management', 
     path: '/manage/optin', 
-    icon: <CheckSquare className="h-4 w-4 mr-2" /> 
+    icon: <CheckSquare className="h-4 w-4" /> 
   },
   { 
     name: 'Live Chat Settings', 
     path: '/manage/chat-settings', 
-    icon: <MessageSquare className="h-4 w-4 mr-2" /> 
+    icon: <MessageSquare className="h-4 w-4" /> 
   },
   { 
     name: 'Agents', 
     path: '/manage/agents', 
-    icon: <UserCircle className="h-4 w-4 mr-2" /> 
+    icon: <UserCircle className="h-4 w-4" /> 
   },
   { 
     name: 'Tags', 
     path: '/manage/tags', 
-    icon: <Tag className="h-4 w-4 mr-2" /> 
+    icon: <Tag className="h-4 w-4" /> 
   },
   { 
     name: 'Analytics', 
     path: '/manage/analytics', 
-    icon: <BarChart className="h-4 w-4 mr-2" /> 
+    icon: <BarChart className="h-4 w-4" /> 
   },
   { 
     name: 'API Key', 
     path: '/manage/api', 
-    icon: <Key className="h-4 w-4 mr-2" /> 
+    icon: <Key className="h-4 w-4" /> 
   },
   { 
     name: 'Billing & Usage', 
     path: '/manage/billing', 
-    icon: <CreditCard className="h-4 w-4 mr-2" /> 
+    icon: <CreditCard className="h-4 w-4" /> 
   },
   { 
     name: 'Notification Prefs', 
     path: '/manage/notifications', 
-    icon: <Bell className="h-4 w-4 mr-2" /> 
+    icon: <Bell className="h-4 w-4" /> 
   }
 ];
 
 const ManageLayout: React.FC = () => {
   const location = useLocation();
-  const activeTab = location.pathname.split('/')[2] || 'templates';
+  const currentPath = location.pathname;
 
   return (
     <Layout>
@@ -77,28 +76,35 @@ const ManageLayout: React.FC = () => {
           </p>
         </div>
         
-        <div className="flex overflow-x-auto pb-2">
-          <Tabs value={activeTab} className="w-full">
-            <TabsList className="bg-card">
-              {manageItems.map((item) => (
-                <TabsTrigger
-                  key={item.path}
-                  value={item.path.split('/')[2]}
-                  className="flex items-center gap-1"
-                  asChild
-                >
-                  <NavLink to={item.path} className="flex items-center">
+        <div className="flex gap-6">
+          {/* Left Sidebar Navigation */}
+          <div className="w-64 shrink-0">
+            <div className="bg-card rounded-lg border overflow-hidden">
+              <nav className="flex flex-col p-2 space-y-1">
+                {manageItems.map((item) => (
+                  <NavLink
+                    key={item.path}
+                    to={item.path}
+                    className={({ isActive }) => `
+                      flex items-center gap-3 px-3 py-2 text-sm rounded-md
+                      hover:bg-accent hover:text-accent-foreground
+                      ${isActive ? 'bg-accent text-accent-foreground font-medium' : 'text-muted-foreground'}
+                    `}
+                  >
                     {item.icon}
                     <span>{item.name}</span>
                   </NavLink>
-                </TabsTrigger>
-              ))}
-            </TabsList>
-          </Tabs>
-        </div>
-        
-        <div className="bg-card p-6 rounded-lg border">
-          <Outlet />
+                ))}
+              </nav>
+            </div>
+          </div>
+          
+          {/* Content Area */}
+          <div className="flex-1">
+            <div className="bg-card p-6 rounded-lg border h-full">
+              <Outlet />
+            </div>
+          </div>
         </div>
       </div>
     </Layout>
